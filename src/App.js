@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import List from './List';
 import axios from 'axios';
+import todoingServer from './todoing-server.js';
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends Component {
   
   componentDidMount() {
     axios
-      .get('http://localhost:3001/echo')
+      .get(todoingServer.path())
       .then(res => { 
         var lists = res.data;
         this.setState({ lists }); 
@@ -30,6 +31,7 @@ class App extends Component {
         <p className="App-intro">
           {this.state.lists.map(list => <List list={list}></List>)}
         </p>
+        <button>Nova sub-lista</button>
       </div>
     );
   }

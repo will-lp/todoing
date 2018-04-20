@@ -1,0 +1,30 @@
+.list-item-check {
+  height: 20px
+}
+
+.list-item-input, .list-subtitle {
+  border: 0px;
+  border-bottom: 1px solid #c0c0c0;
+  padding: 8px;
+}
+
+.list-item-input:focus {
+  background-color: #FFf5f5;
+  border-bottom: 1px solid red;
+}
+
+.list-subtitle:focus {
+  background-color: #f5fff5;
+  border-bottom: 1px solid green;
+}
+
+.list-item-input {
+  width: 500px;
+}
+
+
+.list-item-input.new { 
+  border-bottom: 1px solid #e0e0e0;
+  margin-left: 25px;
+}
+
