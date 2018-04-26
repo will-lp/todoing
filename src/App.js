@@ -17,7 +17,19 @@ class App extends Component {
       .then(res => { 
         var lists = res.data;
         this.setState({ lists }); 
-        console.log('app state', this.state);
+      });
+  }
+  
+  newList() {
+    let lists = this.state.lists.slice();
+    let sublist = { title: 'Nova lista', items: [] };
+    lists.push(sublist);
+    
+    axios
+      .post(todoingServer.path(), sublist)
+      .then(result => { 
+        sublist.id = result.data.id; 
+        this.setState({ lists }); 
       });
   }
   
@@ -31,7 +43,7 @@ class App extends Component {
         <p className="App-intro">
           {this.state.lists.map(list => <List list={list}></List>)}
         </p>
-        <button>Nova sub-lista</button>
+        <button onClick={this.newList.bind(this)}>Nova sub-lista</button>
       </div>
     );
   }

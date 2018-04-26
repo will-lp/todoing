@@ -8,28 +8,30 @@ class ListItem extends Component {
   constructor(props) {
     super(props)
     this.state = props.item;
-    console.log('ListItem', props.item);
+    this.sublistId = props.sublistId;
+    if (!this.state.id) {
+      this.save();
+    }
   }
   
   onTextChange(e) {
     this.setState({ text: e.target.value });
-    console.log('ontextchange', this.state);
   }
   
   onCheckChange(e) {
-    console.log('oncheckchange', this.state);
-    this.setState({ checked: e.target.checked });
+    console.log('oncheckchange', e.target.checked);
+    this.setState({ checked: e.target.checked }, this.save);
   }
   
-  save(e) {
+  save() {
     axios
-      .post(todoingServer.path(), this.state)
-      .then(res => console.log('listitem save res', res));
+      .post(todoingServer.path('/' + this.sublistId), this.state)
+      .then(res => this.setState({ id: res.data.id }));
   }
   
   saveOnEnter(e) {
-    if (e.key == 13) {
-      this.save(e)
+    if (e.key == 'Enter') {
+      this.save(e);
     }
   }
 
