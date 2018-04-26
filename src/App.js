@@ -8,28 +8,31 @@ import todoingServer from './todoing-server.js';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { lists : [] };
+    this.state = { sublists : [] };
   }
   
   componentDidMount() {
     axios
       .get(todoingServer.path())
       .then(res => { 
-        var lists = res.data;
-        this.setState({ lists }); 
+        var list = res.data;
+        
+        let callback = !list.sublists.length ? this.newList : null;
+        
+        this.setState(list, callback); 
       });
   }
   
   newList() {
-    let lists = this.state.lists.slice();
+    let sublists = this.state.sublists.slice();
     let sublist = { title: 'Nova lista', items: [] };
-    lists.push(sublist);
+    sublists.push(sublist);
     
     axios
       .post(todoingServer.path(), sublist)
       .then(result => { 
         sublist.id = result.data.id; 
-        this.setState({ lists }); 
+        this.setState({ sublists }); 
       });
   }
   
@@ -41,7 +44,7 @@ class App extends Component {
           <h1 className="App-title">{this.state.title}</h1>
         </header>
         <p className="App-intro">
-          {this.state.lists.map(list => <List list={list}></List>)}
+          {this.state.sublists.map(list => <List list={list}></List>)}
         </p>
         <button onClick={this.newList.bind(this)}>Nova sub-lista</button>
       </div>

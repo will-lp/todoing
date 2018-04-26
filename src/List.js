@@ -40,7 +40,7 @@ class List extends Component {
                  onChange={this.onTextChange.bind(this)}
                  className="list-subtitle"></input>
         </p>
-        {this.state.items.map(item => <ListItem item={item} sublistId={this.state.id}></ListItem>)}
+        {this.state.items.map(item => <ListItem item={item} sublistId={this.state._id}></ListItem>)}
         <input type="text"
                onBlur={this.createNewListItem.bind(this)}
                ref={ me => { this.newInput = me; }}
