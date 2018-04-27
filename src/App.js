@@ -31,7 +31,7 @@ class App extends Component {
     axios
       .post(todoingServer.path(), sublist)
       .then(result => { 
-        sublist.id = result.data.id; 
+        sublist._id = result.data._id; 
         this.setState({ sublists }); 
       });
   }

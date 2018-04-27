@@ -25,8 +25,8 @@ class ListItem extends Component {
   
   save() {
     axios
-      .post(todoingServer.path('/' + this.sublistId), this.state)
-      .then(res => this.setState({ id: res.data.id }));
+      .post(todoingServer.path(`/${this.sublistId}/saveItem`), this.state)
+      .then(res => this.setState({ _id: res.data._id }));
   }
   
   saveOnEnter(e) {
